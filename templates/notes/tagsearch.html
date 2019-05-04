@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}
+    DjNote. {{ title }}
+{% endblock title %}
+
+{% block body %}
+
+    <div class="alert alert-primary text-center" role="alert">
+        <h1>{{ title }}</h1>
+    </div>
+
+    {% if notes %}
+
+        {% include 'notes/notelist.html' with notes=notes %}
+
+    {% else %}
+
+        <div class='alert alert-warning' align='center'>
+            <h3>Нет заметок с выбранным тегом!</h3>
+        </div>
+
+    {% endif %}
+
+
+
+{% endblock body %}

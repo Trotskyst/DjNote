@@ -1,0 +1,32 @@
+<div class="card">
+    <h5 class="card-header">{% if tag %} Изменение тега {% else %} Создание нового тега {% endif %}</h5>
+    <div class="card-body">
+
+        <form class="well contact-form" method="post" action="{% url 'notes:addtag' %}">
+            {% csrf_token %}
+
+            <label for="tag_edit">Тег:</label>
+            <input type="text" name="label" maxlength="200" id="tag_edit" value="{{ tag.label }}">
+
+
+            <button type='submit' class='btn btn-primary btn-lg btn-block mt-2'>
+                {% if tag %}
+                    Изменить тег
+                {% else %}
+                    Создать тег
+                {% endif %}
+            </button>
+        </form>
+
+    </div>
+</div>
+
+{# временно убираю возможность удаления тега. Не придумал, куда прикрутить #}
+{#{% if tag %}#}
+{#    <div class="col-md-12" style="padding-top:15px">#}
+{#        <form action="" method="POST">{% csrf_token %}#}
+{#            <input type="hidden" name="control" value="delete"/>#}
+{#            <input type="submit" value="Удалить метку" class="btn btn-lg btn-block btn-danger"/>#}
+{#        </form>#}
+{#    </div>#}
+{#{% endif %}#}

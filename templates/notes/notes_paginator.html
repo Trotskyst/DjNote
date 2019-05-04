@@ -1,0 +1,21 @@
+<div class="pagination mt-1 mb-4 centering">
+    <span class="step-links centering">
+        {% if notes.has_previous %}
+            <a href="?page=1" class="btn btn-outline-info">в начало</a>
+            <a href="?page={{ notes.previous_page_number }}" class="btn btn-outline-info">предыдущая</a>
+        {% endif %}
+
+        {% for num in notes.paginator.page_range %}
+            {% if num == notes.number %}
+                <button class="btn btn-info">{{ num }}</button>
+            {% elif num > notes.number|add:'-3' and num < notes.number|add:'3' %}
+                <a href="?page={{ num }}" class="btn btn-outline-info">{{ num }}</a>
+            {% endif %}
+        {% endfor %}
+
+        {% if notes.has_next %}
+            <a href="?page={{ notes.next_page_number }}" class="btn btn-outline-info">следующая</a>
+            <a href="?page={{ notes.paginator.num_pages }}" class="btn btn-outline-info">в конец</a>
+        {% endif %}
+    </span>
+</div>

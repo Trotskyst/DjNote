@@ -1,0 +1,15 @@
+{# выводим список тегов #}
+
+<div class="alert alert-info text-center" role="alert">
+    <h1>Теги</h1>
+</div>
+
+<ul>
+    {% if tags %}
+        {% for tag in tags %}
+            <li><a href="{% url 'notes:tagsearch' id=tag.id %}">{{ tag }}</a></li>
+        {% endfor %}
+    {% else %}
+        <div class='alert alert-warning'>Теги не созданы</div>
+    {% endif %}
+</ul>

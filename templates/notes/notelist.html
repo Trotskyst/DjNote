@@ -1,0 +1,43 @@
+{# выводим список заметок #}
+
+    {% include 'notes/notes_paginator.html' with notes=notes page_obj=page_obj %}
+
+{% for note in notes %}
+
+    <div class="card mb-4">
+        <h5 class="card-header">{{ note.label }}</h5>
+        <div class="card-body">
+            <p class="card-text text-truncate">{{ note.body }}</p>
+            <small class="text-muted">{{ note.timestamp|date:"Дата: d E Y в H:i:s" }}</small>
+        </div>
+        <div class="card-footer text-muted">
+            <div class="row">
+                <div class="col-md-9">
+                    {% if note.tags %}
+                        <small class="text-muted">Теги:</small>
+                        {% for tag in note.tags.all %}
+                            <small class="text-muted"><a
+                                    href="{% url 'notes:tagsearch' id=tag.id %}">{{ tag }}</a>
+                            </small>
+                            {% if not forloop.last %}
+                                |
+                            {% endif %}
+                        {% endfor %}
+                    {% endif %}
+                </div>
+                <div class="col-md-3">
+                    <div class="text-right">
+                        <small>
+                            <a href="{% url 'notes:addnote' %}?id={{ note.id }}">
+                                Редактировать заметку</a>
+                        </small>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endfor %}
+
+{% include 'notes/notes_paginator.html' with notes=notes %}
+

@@ -1,0 +1,79 @@
+{% extends 'notes/../base.html' %}
+{% load static %}
+
+{% block body %}
+
+    <h1 align='center'>{% if note %} Изменение заметки {% else %} Создание новой заметки {% endif %}</h1>
+
+
+    <form action="" method="post">{% csrf_token %}
+        {{ form.as_p }}
+
+        <div class="row mb-4">
+            <div class="col">
+                <a href="#" class="btn btn-sm btn-info add_tag" data-toggle="modal" data-target="#basicModal"
+                   data-url="{% url 'notes:addtag' %}">Добавить тег</a>
+            </div>
+        </div>
+
+
+        <input type='submit' value=
+                {% if note %}
+                    'Изменить заметку'
+                {% else %}
+                    'Создать заметку'
+                {% endif %}
+        class='btn btn-primary btn-lg btn-block' />
+    </form>
+
+    {% if note %}
+        <div class="col-md-12" style="padding-top:15px; padding-left: 0px; padding-right: 0px">
+            <form action="" method="POST">{% csrf_token %}
+                <input type="hidden" name="control" value="delete"/>
+                <input type="submit" value="Удалить заметку" class="btn btn-lg btn-block btn-danger"/>
+            </form>
+        </div>
+    {% endif %}
+
+    <!-- basic modal -->
+    <div class="modal fade" id="basicModal" tabindex="-1" role="dialog" aria-labelledby="basicModal" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <script type='text/javascript'>
+        $('input[type="text"]').addClass('form-control');
+        $('textarea').addClass('form-control');
+        $('select').addClass('form-control');
+
+        $(".add_tag").on("click", function () {
+            $.ajax({
+                url: $(this).attr("data-url"),
+                success: function (data) {
+                    $(".modal-body").html(data);
+                }
+            });
+        });
+
+        $('#basicModal').on('shown.bs.modal', function () {
+            setTimeout(function () {
+                $('#tag_edit').focus();
+            }, 100);
+        })
+
+    </script>
+
+
+{% endblock body %}

@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block body %}
+
+    <div class="form-section">
+        <h2>Вы успешно вышли с аккаунта</h2>
+    </div>
+
+    <a href="{% url 'home' %}">Войти в личный кабинет снова</a>
+
+{% endblock body %}
