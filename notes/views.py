@@ -14,7 +14,7 @@ class DivErrorList(ErrorList):
          return self.as_divs()
      def as_divs(self):
          if not self: return ''
-         return '<div class="errorlist test">%s</div>' % ''.join(['<div class="error">%s</div>' % e for e in self])
+         return '<div class="errorlist">%s</div>' % ''.join(['<div class="error">%s</div>' % e for e in self])
 
 
 def authuser_only(user):
@@ -47,7 +47,6 @@ def add_note(request):
     return render(request, 'notes/addnote.html', {'form': form, 'note': note})
 
 
-# @user_passes_test(authuser_only, login_url="/")
 def add_tag(request):
     id = request.GET.get('id', None)
     if id is not None:
