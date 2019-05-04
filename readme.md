@@ -1,3 +1,4 @@
 DjNote
+A project that allows the user to store personal notes
 
-Проект, который позволяет пользователю хранить личные заметки в Интернете!
+Python + Django
